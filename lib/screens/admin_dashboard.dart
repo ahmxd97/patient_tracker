@@ -104,7 +104,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
             child: Card(
               child: ListTile(
                 title: Text(auth.userName ?? '',
-                    style: const TextStyle(color: Colors.black)),
+                    style: const TextStyle(color: Colors.white)),
                 subtitle: Text(
                     'ID: ${auth.userId ?? ''} | Title: ${auth.userTitle ?? ''} | Number of Patients: ${_patients.length}',
                     style: const TextStyle(color: Colors.black)),
