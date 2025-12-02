@@ -95,7 +95,9 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                       ),
                     ],
                   ),
-                  child: ListTile(title: Text(_records[index].note)),
+                  child: ListTile(
+                      title: Text(_records[index].note,
+                          style: const TextStyle(color: Colors.white))),
                 ),
               ),
             ),

@@ -103,9 +103,11 @@ class _AdminDashboardState extends State<AdminDashboard> {
             padding: const EdgeInsets.all(8.0),
             child: Card(
               child: ListTile(
-                title: Text(auth.userName ?? ''),
+                title: Text(auth.userName ?? '',
+                    style: const TextStyle(color: Colors.black)),
                 subtitle: Text(
-                    'ID: ${auth.userId ?? ''} | Title: ${auth.userTitle ?? ''} | Number of Patients: ${_patients.length}'),
+                    'ID: ${auth.userId ?? ''} | Title: ${auth.userTitle ?? ''} | Number of Patients: ${_patients.length}',
+                    style: const TextStyle(color: Colors.black)),
               ),
             ),
           ),
@@ -131,9 +133,11 @@ class _AdminDashboardState extends State<AdminDashboard> {
                       ],
                     ),
                     child: ListTile(
-                      title: Text(p.name),
+                      title: Text(p.name,
+                          style: const TextStyle(color: Colors.white)),
                       subtitle: Text(
-                          'ID: ${p.id ?? ''} | Age: ${p.age} | Contact: ${p.contact} | Doctor: ${p.doctorAssigned}'),
+                          'ID: ${p.id ?? ''} | Age: ${p.age} | Contact: ${p.contact} | Doctor: ${p.doctorAssigned}',
+                          style: const TextStyle(color: Colors.white)),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [

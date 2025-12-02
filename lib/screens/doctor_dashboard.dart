@@ -70,9 +70,11 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
             padding: const EdgeInsets.all(8.0),
             child: Card(
               child: ListTile(
-                title: Text(auth.userName ?? ''),
+                title: Text(auth.userName ?? '',
+                    style: const TextStyle(color: Colors.black)),
                 subtitle: Text(
-                    'ID: ${auth.userId ?? ''} | Title: ${auth.userTitle ?? ''}'),
+                    'ID: ${auth.userId ?? ''} | Title: ${auth.userTitle ?? ''}',
+                    style: const TextStyle(color: Colors.black)),
               ),
             ),
           ),
@@ -106,8 +108,10 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                       ],
                     ),
                     child: ListTile(
-                      title: Text(p.name),
-                      subtitle: Text('ID: ${p.id ?? ''} | Age: ${p.age}'),
+                      title: Text(p.name,
+                          style: const TextStyle(color: Colors.white)),
+                      subtitle: Text('ID: ${p.id ?? ''} | Age: ${p.age}',
+                          style: const TextStyle(color: Colors.white)),
                       onTap: () => context.go('/patient_details', extra: p),
                     ),
                   ),

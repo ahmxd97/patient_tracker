@@ -81,7 +81,9 @@ class _EditPatientScreenState extends State<EditPatientScreen> {
               hint: const Text('Gender'),
               items: ['Male', 'Female', 'Others'].map((String value) {
                 return DropdownMenuItem<String>(
-                    value: value, child: Text(value));
+                    value: value,
+                    child: Text(value,
+                        style: const TextStyle(color: Colors.black)));
               }).toList(),
               onChanged: (newValue) => setState(() => _gender = newValue!),
             ),
@@ -99,7 +101,9 @@ class _EditPatientScreenState extends State<EditPatientScreen> {
               items: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
                   .map((String value) {
                 return DropdownMenuItem<String>(
-                    value: value, child: Text(value));
+                    value: value,
+                    child: Text(value,
+                        style: const TextStyle(color: Colors.black)));
               }).toList(),
               onChanged: (newValue) => setState(() => _bloodGroup = newValue!),
             ),
