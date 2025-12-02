@@ -50,6 +50,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Doctor Dashboard'),
+        titleTextStyle: const TextStyle(color: Colors.white),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.go('/'),
@@ -71,10 +72,10 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
             child: Card(
               child: ListTile(
                 title: Text(auth.userName ?? '',
-                    style: const TextStyle(color: Colors.black)),
+                    style: const TextStyle(color: Colors.white)),
                 subtitle: Text(
                     'ID: ${auth.userId ?? ''} | Title: ${auth.userTitle ?? ''}',
-                    style: const TextStyle(color: Colors.black)),
+                    style: const TextStyle(color: Colors.white)),
               ),
             ),
           ),

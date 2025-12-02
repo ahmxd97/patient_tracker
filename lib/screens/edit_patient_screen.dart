@@ -48,6 +48,7 @@ class _EditPatientScreenState extends State<EditPatientScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit Patient'),
+        titleTextStyle: const TextStyle(color: Colors.white),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.go('/admin'),

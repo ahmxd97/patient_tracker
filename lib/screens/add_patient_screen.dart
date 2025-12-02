@@ -28,6 +28,7 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Patient'),
+        titleTextStyle: const TextStyle(color: Colors.white),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.go('/admin'),

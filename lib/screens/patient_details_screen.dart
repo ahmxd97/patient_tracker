@@ -38,6 +38,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.patient.name),
+        titleTextStyle: const TextStyle(color: Colors.white),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.go('/doctor'),
