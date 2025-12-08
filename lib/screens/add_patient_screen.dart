@@ -64,7 +64,7 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
               TextFormField(
                   controller: _contact,
                   decoration: const InputDecoration(
-                      labelText: 'Contact', hintText: 'e.g., 1234567890'),
+                      labelText: 'Contact', hintText: 'e.g., 03XX-XXXXXXX'),
                   validator: (value) => value!.isEmpty ? 'Required' : null),
               SizedBox(height: 8),
               TextFormField(
