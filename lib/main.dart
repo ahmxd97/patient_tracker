@@ -11,35 +11,35 @@ void main() {
       child: MaterialApp.router(
         routerConfig: router,
         theme: ThemeData(
-          primaryColor: Color(0xFF8B2722),
-          scaffoldBackgroundColor: Color(0xFF8B2722),
-          appBarTheme: AppBarTheme(color: Color(0xFF000000)),
+          primaryColor: Color.fromARGB(255, 55, 177, 25),
+          scaffoldBackgroundColor: Color.fromARGB(255, 44, 139, 20),
+          appBarTheme: AppBarTheme(color: Color.fromARGB(255, 3, 148, 158)),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.white),
-              foregroundColor: MaterialStateProperty.all(Colors.black),
-              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+              backgroundColor: WidgetStateProperty.all(Colors.white),
+              foregroundColor: WidgetStateProperty.all(const Color.fromARGB(255, 24, 164, 219)),
+              shape: WidgetStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12))),
             ),
           ),
           textTheme: GoogleFonts.poppinsTextTheme(
             ThemeData.dark()
                 .textTheme
-                .apply(bodyColor: Colors.white, displayColor: Colors.white),
+                .apply(bodyColor: const Color.fromARGB(255, 0, 0, 0), displayColor: const Color.fromARGB(255, 255, 255, 255)),
           ),
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: IconThemeData(color: const Color.fromARGB(255, 0, 0, 0)),
           cardTheme: CardThemeData(
-            color: Color(0xFF000000),
+            color: Color.fromARGB(255, 3, 148, 158),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             elevation: 4,
           ),
           inputDecorationTheme: InputDecorationTheme(
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-            fillColor: Color.fromARGB(255, 2, 2, 2),
+            fillColor: Color.fromARGB(255, 255, 252, 252),
             filled: true,
-            labelStyle: TextStyle(color: Colors.white),
-            hintStyle: TextStyle(color: Colors.white),
+            labelStyle: TextStyle(color: const Color.fromARGB(255, 6, 173, 202)),
+            hintStyle: TextStyle(color: const Color.fromARGB(255, 252, 248, 248)),
           ),
         ),
       ),
