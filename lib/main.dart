@@ -7,6 +7,7 @@ import 'router.dart';
 void main() {
   runApp(
     ChangeNotifierProvider(
+      
       create: (_) => AuthProvider(),
       child: MaterialApp.router(
         routerConfig: router,
