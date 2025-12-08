@@ -27,6 +27,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
     setState(() => _patients = patients);
   }
 
+// lib/screens/admin_dashboard.dart (update print headers/data)
   Future<void> _printPatients() async {
     final pdf = pw.Document();
     pdf.addPage(
@@ -44,7 +45,12 @@ class _AdminDashboardState extends State<AdminDashboard> {
               'Blood Group',
               'Blood Pressure',
               'Condition',
-              'Doctor Assigned'
+              'Doctor Assigned',
+              'Address',
+              'Emergency Contact',
+              'Insurance',
+              'Department',
+              'Status'
             ],
             data: _patients
                 .map((p) => [
@@ -59,6 +65,11 @@ class _AdminDashboardState extends State<AdminDashboard> {
                       p.bloodPressure,
                       p.condition,
                       p.doctorAssigned,
+                      p.address,
+                      p.emergencyContact,
+                      p.insurance,
+                      p.department,
+                      p.status,
                     ])
                 .toList(),
           );
@@ -75,7 +86,6 @@ class _AdminDashboardState extends State<AdminDashboard> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Admin Dashboard'),
-        titleTextStyle: const TextStyle(color: Colors.white),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.go('/'),
@@ -105,7 +115,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
             child: Card(
               child: ListTile(
                 title: Text(auth.userName ?? '',
-                    style: const TextStyle(color: Colors.white)),
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 24, 21, 21))),
                 subtitle: Text(
                     'ID: ${auth.userId ?? ''} | Title: ${auth.userTitle ?? ''} | Number of Patients: ${_patients.length}',
                     style: const TextStyle(color: Colors.black)),

@@ -1,3 +1,4 @@
+// lib/screens/patient_details_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../db/database.dart';
@@ -38,7 +39,6 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.patient.name),
-        titleTextStyle: const TextStyle(color: Colors.white),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.go('/doctor'),
@@ -71,6 +71,11 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                   Text('Blood Pressure: ${widget.patient.bloodPressure}'),
                   Text('Condition: ${widget.patient.condition}'),
                   Text('Assigned Doctor: ${widget.patient.doctorAssigned}'),
+                  Text('Address: ${widget.patient.address}'),
+                  Text('Emergency Contact: ${widget.patient.emergencyContact}'),
+                  Text('Insurance: ${widget.patient.insurance}'),
+                  Text('Department: ${widget.patient.department}'),
+                  Text('Status: ${widget.patient.status}'),
                 ],
               ),
             ),
@@ -96,9 +101,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                       ),
                     ],
                   ),
-                  child: ListTile(
-                      title: Text(_records[index].note,
-                          style: const TextStyle(color: Colors.white))),
+                  child: ListTile(title: Text(_records[index].note)),
                 ),
               ),
             ),
