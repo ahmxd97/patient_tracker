@@ -8,14 +8,20 @@ import '../models/record.dart';
 
 class DatabaseHelper {
   static Database? _db;
+  static final DatabaseHelper _instance = DatabaseHelper._internal();
+  
+  factory DatabaseHelper() => _instance;
+  
+  DatabaseHelper._internal();
 
   Future<Database> get db async {
-    WidgetsFlutterBinding.ensureInitialized();
-    _db ??= await initDb();
+    if (_db != null) return _db!;
+    _db = await initDb();
     return _db!;
   }
 
   Future<Database> initDb() async {
+    WidgetsFlutterBinding.ensureInitialized();
     return openDatabase(
       join(await getDatabasesPath(), 'patient.db'),
       onCreate: (db, version) async {
