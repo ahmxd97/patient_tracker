@@ -22,6 +22,12 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
     _search.addListener(_filter);
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _loadPatients();
+  }
+
   Future<void> _loadPatients() async {
     final auth = Provider.of<AuthProvider>(context, listen: false);
     final patients = await DatabaseHelper().getPatients();
@@ -72,10 +78,12 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
             child: Card(
               child: ListTile(
                 title: Text(auth.userName ?? '',
-                    style: const TextStyle(color: Color.fromARGB(255, 3, 3, 3))),
+                    style:
+                        const TextStyle(color: Color.fromARGB(255, 3, 3, 3))),
                 subtitle: Text(
                     'ID: ${auth.userId ?? ''} | Title: ${auth.userTitle ?? ''}',
-                    style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
+                    style:
+                        const TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
               ),
             ),
           ),

@@ -9,6 +9,7 @@ void main() {
     ChangeNotifierProvider(
       create: (_) => AuthProvider(),
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         routerConfig: router,
         theme: ThemeData(
           useMaterial3: true, // Enable Material 3 for modern design
