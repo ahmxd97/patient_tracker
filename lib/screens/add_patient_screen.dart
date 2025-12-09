@@ -75,14 +75,17 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                   validator: (value) =>
                       int.tryParse(value!) == null ? 'Invalid number' : null),
               SizedBox(height: 8),
-              DropdownButton<String>(
+              DropdownButtonFormField<String>(
                 value: _gender,
-                hint: const Text('Gender'),
+                decoration: const InputDecoration(labelText: 'Gender'),
+                hint: const Text('Select Gender'),
                 items: ['Male', 'Female', 'Others'].map((String value) {
                   return DropdownMenuItem<String>(
                       value: value, child: Text(value));
                 }).toList(),
                 onChanged: (newValue) => setState(() => _gender = newValue),
+                validator: (value) =>
+                    value == null ? 'Please select gender' : null,
               ),
               SizedBox(height: 8),
               TextFormField(
@@ -103,15 +106,18 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                       ? 'Invalid number'
                       : null),
               SizedBox(height: 8),
-              DropdownButton<String>(
+              DropdownButtonFormField<String>(
                 value: _bloodGroup,
-                hint: const Text('Blood Group'),
+                decoration: const InputDecoration(labelText: 'Blood Group'),
+                hint: const Text('Select Blood Group'),
                 items: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
                     .map((String value) {
                   return DropdownMenuItem<String>(
                       value: value, child: Text(value));
                 }).toList(),
                 onChanged: (newValue) => setState(() => _bloodGroup = newValue),
+                validator: (value) =>
+                    value == null ? 'Please select blood group' : null,
               ),
               SizedBox(height: 8),
               TextFormField(
@@ -151,20 +157,24 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                       labelText: 'Insurance', hintText: 'e.g., ABC Insurance'),
                   validator: (value) => value!.isEmpty ? 'Required' : null),
               SizedBox(height: 8),
-              DropdownButton<String>(
+              DropdownButtonFormField<String>(
                 value: _department,
-                hint: const Text('Department'),
+                decoration: const InputDecoration(labelText: 'Department'),
+                hint: const Text('Select Department'),
                 items: ['Emergency', 'Elective Direct', 'Observation']
                     .map((String value) {
                   return DropdownMenuItem<String>(
                       value: value, child: Text(value));
                 }).toList(),
                 onChanged: (newValue) => setState(() => _department = newValue),
+                validator: (value) =>
+                    value == null ? 'Please select department' : null,
               ),
               SizedBox(height: 8),
-              DropdownButton<String>(
+              DropdownButtonFormField<String>(
                 value: _status,
-                hint: const Text('Status'),
+                decoration: const InputDecoration(labelText: 'Status'),
+                hint: const Text('Select Status'),
                 items: [
                   'Waiting',
                   'Appointment',
@@ -176,17 +186,15 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                       value: value, child: Text(value));
                 }).toList(),
                 onChanged: (newValue) => setState(() => _status = newValue),
+                validator: (value) =>
+                    value == null ? 'Please select status' : null,
               ),
               SizedBox(height: 16),
               ElevatedButton.icon(
                 icon: Icon(Icons.person_add),
                 label: const Text('Save'),
                 onPressed: () async {
-                  if (_formKey.currentState!.validate() &&
-                      _gender != null &&
-                      _bloodGroup != null &&
-                      _department != null &&
-                      _status != null) {
+                  if (_formKey.currentState!.validate()) {
                     final patient = Patient(
                       name: _name.text,
                       contact: _contact.text,
@@ -206,9 +214,14 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                     );
                     await DatabaseHelper().insertPatient(patient);
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text('Patient info saved',
+                        content: Text('Patient info saved successfully',
                             style: TextStyle(color: Colors.white))));
                     context.go('/admin');
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Please fill all required fields',
+                            style: TextStyle(color: Colors.white)),
+                        backgroundColor: Colors.red));
                   }
                 },
               ),

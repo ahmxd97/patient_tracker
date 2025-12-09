@@ -27,7 +27,6 @@ class _AdminDashboardState extends State<AdminDashboard> {
     setState(() => _patients = patients);
   }
 
-// lib/screens/admin_dashboard.dart (update print headers/data)
   Future<void> _printPatients() async {
     final pdf = pw.Document();
     pdf.addPage(
@@ -124,56 +123,70 @@ class _AdminDashboardState extends State<AdminDashboard> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: _patients.length,
-              itemBuilder: (context, index) {
-                final p = _patients[index];
-                return Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xFF000000),
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
-                          spreadRadius: 2,
-                          blurRadius: 8,
-                          offset: const Offset(0, 4),
+            child: _patients.isEmpty
+                ? Center(
+                    child: Text(
+                      'No patients found',
+                      style: TextStyle(fontSize: 18, color: Colors.grey[600]),
+                    ),
+                  )
+                : ListView.builder(
+                    itemCount: _patients.length,
+                    itemBuilder: (context, index) {
+                      final p = _patients[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4, horizontal: 16),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xFF000000),
+                            borderRadius: BorderRadius.circular(16),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.2),
+                                spreadRadius: 2,
+                                blurRadius: 8,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: ListTile(
+                            title: Text(p.name,
+                                style: const TextStyle(color: Colors.white)),
+                            subtitle: Text(
+                                'ID: ${p.id ?? ''} | Age: ${p.age} | Contact: ${p.contact} | Doctor: ${p.doctorAssigned}',
+                                style: const TextStyle(color: Colors.white)),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.edit,
+                                      color: Colors.white),
+                                  onPressed: () =>
+                                      context.go('/edit_patient', extra: p),
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.delete,
+                                      color: Colors.white),
+                                  onPressed: () async {
+                                    if (p.id != null) {
+                                      await DatabaseHelper()
+                                          .deletePatient(p.id!);
+                                      _loadPatients();
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                              content: Text(
+                                                  'Patient deleted successfully')));
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                      ],
-                    ),
-                    child: ListTile(
-                      title: Text(p.name,
-                          style: const TextStyle(color: Colors.white)),
-                      subtitle: Text(
-                          'ID: ${p.id ?? ''} | Age: ${p.age} | Contact: ${p.contact} | Doctor: ${p.doctorAssigned}',
-                          style: const TextStyle(color: Colors.white)),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.edit),
-                            onPressed: () =>
-                                context.go('/edit_patient', extra: p),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.delete),
-                            onPressed: () async {
-                              if (p.id != null) {
-                                await DatabaseHelper().deletePatient(p.id!);
-                                _loadPatients();
-                              }
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
         ],
       ),
