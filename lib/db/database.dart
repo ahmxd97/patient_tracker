@@ -9,9 +9,9 @@ import '../models/record.dart';
 class DatabaseHelper {
   static Database? _db;
   static final DatabaseHelper _instance = DatabaseHelper._internal();
-  
+
   factory DatabaseHelper() => _instance;
-  
+
   DatabaseHelper._internal();
 
   Future<Database> get db async {
@@ -177,26 +177,51 @@ class DatabaseHelper {
   Future<List<Patient>> getPatients() async {
     var database = await db;
     List<Map<String, dynamic>> maps = await database.query('patients');
-    return maps
-        .map((map) => Patient(
-              id: map['id'] as int?,
-              name: map['name'] as String,
-              contact: map['contact'] as String,
-              age: map['age'] as int,
-              gender: map['gender'] as String,
-              height: map['height'] as double,
-              weight: map['weight'] as double,
-              bloodGroup: map['blood_group'] as String,
-              bloodPressure: map['blood_pressure'] as String,
-              condition: map['condition'] as String,
-              doctorAssigned: map['doctor_assigned'] as String,
-              address: map['address'] as String,
-              emergencyContact: map['emergency_contact'] as String,
-              insurance: map['insurance'] as String,
-              department: map['department'] as String,
-              status: map['status'] as String,
-            ))
-        .toList();
+    print('DEBUG: Retrieved ${maps.length} patients from database');
+    return maps.map((map) {
+      // Robust conversions: sqflite may return int for REAL fields
+      final id = map['id'] as int?;
+      final name = map['name'] as String? ?? '';
+      final contact = map['contact'] as String? ?? '';
+      final age = (map['age'] is num)
+          ? (map['age'] as num).toInt()
+          : int.tryParse(map['age']?.toString() ?? '0') ?? 0;
+      final gender = map['gender'] as String? ?? '';
+      final height = (map['height'] is num)
+          ? (map['height'] as num).toDouble()
+          : double.tryParse(map['height']?.toString() ?? '0') ?? 0.0;
+      final weight = (map['weight'] is num)
+          ? (map['weight'] as num).toDouble()
+          : double.tryParse(map['weight']?.toString() ?? '0') ?? 0.0;
+      final bloodGroup = map['blood_group'] as String? ?? '';
+      final bloodPressure = map['blood_pressure'] as String? ?? '';
+      final condition = map['condition'] as String? ?? '';
+      final doctorAssigned = map['doctor_assigned'] as String? ?? '';
+      final address = map['address'] as String? ?? '';
+      final emergencyContact = map['emergency_contact'] as String? ?? '';
+      final insurance = map['insurance'] as String? ?? '';
+      final department = map['department'] as String? ?? '';
+      final status = map['status'] as String? ?? '';
+
+      return Patient(
+        id: id,
+        name: name,
+        contact: contact,
+        age: age,
+        gender: gender,
+        height: height,
+        weight: weight,
+        bloodGroup: bloodGroup,
+        bloodPressure: bloodPressure,
+        condition: condition,
+        doctorAssigned: doctorAssigned,
+        address: address,
+        emergencyContact: emergencyContact,
+        insurance: insurance,
+        department: department,
+        status: status,
+      );
+    }).toList();
   }
 
   Future<int> insertRecord(Record record) async {

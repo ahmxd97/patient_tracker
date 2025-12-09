@@ -25,15 +25,20 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    // Reload patients when this screen becomes active so new entries show up
     _loadPatients();
   }
 
   Future<void> _loadPatients() async {
     final auth = Provider.of<AuthProvider>(context, listen: false);
     final patients = await DatabaseHelper().getPatients();
+    print(
+        'DEBUG Doctor: Loaded ${patients.length} patients, auth.userId=${auth.userId}');
     setState(() {
       _patients =
           patients.where((p) => p.doctorAssigned == auth.userId).toList();
+      print(
+          'DEBUG Doctor: Filtered to ${_patients.length} patients for this doctor');
       _filtered = _patients;
     });
   }

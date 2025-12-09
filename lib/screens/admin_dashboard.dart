@@ -25,11 +25,13 @@ class _AdminDashboardState extends State<AdminDashboard> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    // Ensure we refresh patient list when returning to this screen
     _loadPatients();
   }
 
   Future<void> _loadPatients() async {
     final patients = await DatabaseHelper().getPatients();
+    print('DEBUG Admin: Loaded ${patients.length} patients');
     setState(() => _patients = patients);
   }
 
